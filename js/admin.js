@@ -19,24 +19,25 @@ const fetchPets = async () => {
 
 const renderPetsToTable = (pets) => {
     if (!pets || pets.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="7" class="empty-state">Chưa có thú cưng nào.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="8" class="empty-state">Chưa có thú cưng nào.</td></tr>`;
         return;
     }
 
     const htmlContent = pets.map((pet) => {
         return `
             <tr>
-                <td>${pet.petId}</td>
-                <td><img src="${pet.hinhAnh}" alt="${pet.ten}" class="img-thumb"></td>
-                <td>${pet.ten}</td>
-                <td>${pet.loai}</td>
-                <td>${pet.tuoi}</td>
-                <td>${pet.gioiTinh}</td>
+                <td>${pet.id}</td>
+                <td><img src="${pet.image}" alt="${pet.name}" class="img-thumb"></td>
+                <td>${pet.name}</td>
+                <td>${pet.category}</td>
+                <td>${pet.age}</td>
+                <td>${pet.gender}</td>
+                <td>${pet.price}</td>
                 <td>
-                    <button class="btn-icon btn-edit" type="button" onclick="editPet('${pet.petId}')">
+                    <button class="btn-icon btn-edit" type="button" onclick="editPet('${pet.id}')">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn-icon btn-delete" type="button" onclick="deletePet('${pet.petId}')">
+                    <button class="btn-icon btn-delete" type="button" onclick="deletePet('${pet.id}')">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>
@@ -60,11 +61,12 @@ const resetForm = () => {
 const editPet = async (petId) => {
     try {
         const pet = await petAPI.layMotPhan(petId);
-        document.getElementById("petName").value = pet.ten || "";
-        document.getElementById("petBreed").value = pet.loai || "";
-        document.getElementById("petAge").value = pet.tuoi || "";
-        document.getElementById("petGender").value = pet.gioiTinh || "female";
-        document.getElementById("petImage").value = pet.hinhAnh || "";
+        document.getElementById("petName").value = pet.name || "";
+        document.getElementById("petBreed").value = pet.category || "";
+        document.getElementById("petAge").value = pet.age || "";
+        document.getElementById("petGender").value = pet.gender || "female";
+        document.getElementById("petImage").value = pet.image || "";
+        document.getElementById("petPrice").value = pet.price || "";
         editingPetId = petId;
         formTitle.textContent = "Chỉnh sửa thông tin thú cưng";
         showForm(true);
@@ -90,14 +92,15 @@ const deletePet = async (petId) => {
 const savePet = async (event) => {
     event.preventDefault();
     const petData = {
-        ten: document.getElementById("petName").value.trim(),
-        loai: document.getElementById("petBreed").value.trim(),
-        tuoi: Number(document.getElementById("petAge").value),
-        gioiTinh: document.getElementById("petGender").value,
-        hinhAnh: document.getElementById("petImage").value.trim(),
+        name: document.getElementById("petName").value.trim(),
+        category: document.getElementById("petBreed").value.trim(),
+        age: Number(document.getElementById("petAge").value),
+        gender: document.getElementById("petGender").value,
+        image: document.getElementById("petImage").value.trim(),
+        price: Number(document.getElementById("petPrice").value),
     };
 
-    if (!petData.ten || !petData.loai || !petData.tuoi || !petData.hinhAnh) {
+    if (!petData.name || !petData.category || !petData.age || !petData.image) {
         alert("Vui lòng điền đầy đủ thông tin.");
         return;
     }

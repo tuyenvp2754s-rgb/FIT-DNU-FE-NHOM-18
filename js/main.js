@@ -1,4 +1,4 @@
-﻿const API_URL = "https://69f9a69fc509a40d3aa2ee21.mockapi.io/api/v1/pets";
+﻿const API_URL = "https://6a0d322e769682b8ee75c462.mockapi.io/api/v1/pets";
 const petDisplayGrid = document.getElementById("petDisplayGrid");
 const loader = document.getElementById("loader");
 const cartCount = document.getElementById("cartCount");
@@ -32,11 +32,11 @@ const renderPetGrid = (pets) => {
         .map((pet) => {
             return `
                 <article class="pet-card">
-                    <img src="${pet.hinhAnh}" alt="${pet.ten}">
+                    <img src="${pet.image}" alt="${pet.name}">
                     <div class="pet-card-body">
-                        <h3>${pet.ten}</h3>
-                        <p>${pet.loai} • ${pet.tuoi} tuổi • ${pet.gioiTinh}</p>
-                        <button class="btn-primary" type="button" onclick="handleAdopt('${pet.ten}')">Nhận nuôi</button>
+                        <h3>${pet.name}</h3>
+                        <p>${pet.category} • ${pet.age} tháng • ${pet.gender}</p>
+                        <button class="btn-primary" type="button" onclick="handleAdopt('${pet.name}')">Nhận nuôi</button>
                     </div>
                 </article>
             `;

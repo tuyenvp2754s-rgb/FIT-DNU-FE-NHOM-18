@@ -55,6 +55,6 @@ class APIResource {
   }
 }
 
-const API_URL = "https://69f9a69fc509a40d3aa2ee21.mockapi.io/api/v1";
+const API_URL = "https://6a0d322e769682b8ee75c462.mockapi.io/api/v1";
 const petAPI = new APIResource(API_URL, "pets");
 window.petAPI = petAPI;
